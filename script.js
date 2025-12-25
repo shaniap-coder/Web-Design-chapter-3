@@ -4,6 +4,7 @@ let qi = 0, score = 0;
 let answers = [];
 let sec = 0, timer;
 
+// ================= START QUIZ =================
 function startQuiz() {
   name = username.value.trim();
   batch = document.getElementById("batch").value.trim();
@@ -16,23 +17,24 @@ function startQuiz() {
 
   [startI, endI] = range.value.split("-").map(Number);
 
-  // 🔹 Shuffle questions ONCE
+  // ✅ Shuffle questions ONLY ONCE
   for (let i = startI; i < endI; i++) {
     shuffle(quizData[i]);
   }
 
-  show("quiz");
-  welcomeText.innerText = "Welcome, " + name;
-
-  sec = 0;
   qi = 0;
   score = 0;
   answers = [];
+  sec = 0;
+
+  show("quiz");
+  welcomeText.innerText = "Welcome, " + name;
 
   startTimer();
   loadQ();
 }
 
+// ================= SHOW CARD =================
 function show(id) {
   document.querySelectorAll(".card").forEach(c =>
     c.classList.remove("active")
@@ -40,6 +42,7 @@ function show(id) {
   document.getElementById(id).classList.add("active");
 }
 
+// ================= TIMER =================
 function startTimer() {
   clearInterval(timer);
   timer = setInterval(() => {
@@ -50,40 +53,43 @@ function startTimer() {
   }, 1000);
 }
 
-// ✅ shuffle ONLY ONCE per question
+// ================= SHUFFLE (ONCE) =================
 function shuffle(q) {
   if (q.shuffled) return;
 
-  const correctAns = q.options[q.answer];
+  const correct = q.options[q.answer];
   q.options = [...q.options].sort(() => Math.random() - 0.5);
-  q.answer = q.options.indexOf(correctAns);
+  q.answer = q.options.indexOf(correct);
 
   q.shuffled = true;
 }
 
+// ================= LOAD QUESTION =================
 function loadQ() {
   const q = quizData[startI + qi];
 
-  qno.innerText = Question ${qi + 1} of ${endI - startI};
+  qno.innerText = `Question ${qi + 1} of ${endI - startI}`;
   question.innerText = q.q;
   options.innerHTML = "";
 
-  q.options.forEach((o, i) => {
-    const b = document.createElement("button");
-    b.innerText = o;
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.innerText = opt;
 
+    // ✅ restore previous answer
     if (answers[qi] !== undefined) {
-      b.disabled = true;
-      if (i === q.answer) b.classList.add("correct");
+      btn.disabled = true;
+      if (i === q.answer) btn.classList.add("correct");
       if (answers[qi] === i && i !== q.answer)
-        b.classList.add("wrong");
+        btn.classList.add("wrong");
     }
 
-    b.onclick = () => selectOption(b, i, q.answer);
-    options.appendChild(b);
+    btn.onclick = () => selectOption(btn, i, q.answer);
+    options.appendChild(btn);
   });
 }
 
+// ================= SELECT OPTION =================
 function selectOption(btn, i, ans) {
   if (answers[qi] !== undefined) return;
 
@@ -98,6 +104,7 @@ function selectOption(btn, i, ans) {
   else btn.classList.add("wrong");
 }
 
+// ================= NEXT =================
 function nextQ() {
   if (qi < endI - startI - 1) {
     qi++;
@@ -107,6 +114,7 @@ function nextQ() {
   }
 }
 
+// ================= PREVIOUS =================
 function prevQ() {
   if (qi > 0) {
     qi--;
@@ -114,6 +122,7 @@ function prevQ() {
   }
 }
 
+// ================= RESULT =================
 function showResult() {
   clearInterval(timer);
   show("result");
