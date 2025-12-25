@@ -1,0 +1,111 @@
+*{box-sizing:border-box;font-family:system-ui}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#e0e7ff,#f8fafc);
+}
+
+.app{
+  width:100%;
+  max-width:420px;
+  padding:10px;
+}
+
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  display:none;
+  animation:fade .4s ease;
+}
+
+.card.active{display:block}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1}
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:12px;
+  border:1px solid #c7d2fe;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:14px;
+  background:#000;
+  color:#fff;
+  font-size:16px;
+}
+
+.range.center{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.desc{
+  margin-top:15px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.timer{
+  background:#f1f5f9;
+  padding:6px 10px;
+  border-radius:10px;
+}
+
+.options button{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  color:#000;
+  text-align:left;
+  position:relative;
+}
+
+.correct{
+  background:#22c55e!important;
+  color:#fff;
+}
+
+.wrong{
+  background:#ef4444!important;
+  color:#fff;
+}
+
+.correct::after{
+  content:" ✔ Correct Answer";
+  font-weight:600;
+  font-size:14px;
+}
+
+.nav{
+  display:flex;
+  gap:10px;
+}
+
+.result-box{
+  background:#f8fafc;
+  padding:15px;
+  border-radius:12px;
+}

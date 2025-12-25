@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>IT Quiz Model Paper 2022</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- START -->
+  <section id="start" class="card active">
+    <h1>M1-R5-Set2 (2022)</h1>
+
+    <input id="username" placeholder="Enter your name">
+    <input id="batch" placeholder="Batch Timing (B1 / B2 / B3)">
+
+    <div class="range center">
+      <label>
+        <input type="radio" name="range" value="0-50">
+        Questions 1 – 50
+      </label>
+      <label>
+        <input type="radio" name="range" value="50-100">
+        Questions 51 – 100
+      </label>
+    </div>
+
+    <button onclick="startQuiz()">Start Quiz</button>
+
+    <div class="desc">
+      <p>Teacher: <b>Vikash Pal</b></p>
+      <p>Created by: <b>Shani</b></p>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="card">
+    <div class="top">
+      <b id="welcomeText"></b>
+      <div class="timer">⏱ <span id="time">00:00</span></div>
+    </div>
+
+    <div id="qno"></div>
+    <h2 id="question"></h2>
+
+    <div id="options" class="options"></div>
+
+    <div class="nav">
+      <button onclick="prevQ()">Previous</button>
+      <button onclick="nextQ()">Next</button>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="card">
+    <h1>Quiz Result</h1>
+
+    <div class="result-box">
+      <p><b>Name:</b> <span id="rname"></span></p>
+      <p><b>Batch:</b> <span id="rbatch"></span></p>
+      <p><b>Total Questions:</b> <span id="rtotal"></span></p>
+      <p><b>Correct:</b> <span id="rcorrect"></span></p>
+      <p><b>Wrong:</b> <span id="rwrong"></span></p>
+      <p><b>Skipped:</b> <span id="rskip"></span></p>
+      <p><b>Time Spent:</b> <span id="rtime"></span></p>
+    </div>
+
+    <button onclick="location.reload()">Restart Quiz</button>
+  </section>
+
+</div>
+
+<script src="quizData.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
